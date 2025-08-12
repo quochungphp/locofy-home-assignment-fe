@@ -14,7 +14,7 @@ export class Api {
   }
 
   bearer: string | null = null;
-  headers: AxiosRequestHeaders = {};
+  headers: AxiosRequestHeaders = {} as any;
 
   setHeaders(headers: AxiosRequestHeaders) {
     this.headers = headers;
@@ -26,7 +26,7 @@ export class Api {
       return {
         ...this.headers,
         Authorization: `Bearer ${token}`,
-      };
+      } as any;
     }
     return this.headers;
   }
@@ -122,7 +122,7 @@ export class Api {
       this.setHeaders({
         ...this.headers,
         Authorization: `Bearer ${token}`,
-      });
+      } as any);
     }
   }
 }

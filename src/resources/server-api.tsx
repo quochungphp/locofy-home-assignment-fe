@@ -8,7 +8,7 @@ class ServerApi extends Api{
     this.baseUrl = getServerUrl()
     const headers = {
       "Content-Type": "application/json",
-    };
+    } as any;
 
     this.setHeaders(headers);
   }
