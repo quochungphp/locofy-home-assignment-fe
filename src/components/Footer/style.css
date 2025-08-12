@@ -1,0 +1,23 @@
+.footerBackground {
+    background-color: #457eff !important;
+    color: #fff;
+    width: 100%;
+}
+.footerBackground ul, li {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    color: #fff;
+    list-style-type: none;
+    margin-bottom: 1em;
+}
+.footerBackground li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+.footerBackground h6 {
+    color: #fff;
+    margin-bottom: 1em;
+
+}

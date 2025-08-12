@@ -1,0 +1,59 @@
+
+body {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Locofy style card */
+.MuiContainer-root {
+  background: #ffffff;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+}
+
+/* Error alert styling */
+.alertError {
+  width: 100%;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+/* Subtext color */
+.textSubColor {
+  color: #6b7280 !important;
+  font-size: 0.9rem;
+}
+
+/* Google login button */
+.btn-google {
+  width: 100% !important;
+  height: 50px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  background-color: #ffffff !important;
+  color: #444 !important;
+  border: 1px solid #ddd !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.btn-google:hover {
+  background-color: #f7f7f7 !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Optional: Add Google logo inside if supported */
+.btn-google img {
+  margin-right: 8px;
+}
+/* Links hover */
+.MuiLink-root:hover {
+  text-decoration: underline;
+}

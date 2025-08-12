@@ -1,0 +1,70 @@
+/* Common container card style */
+.auth-container {
+  padding: 40px 30px;
+  border-radius: 20px;
+  margin-top: 60px;
+  background-color: #fff;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Error alert */
+.alertError {
+  width: 100%;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+/* Subtext color */
+.textSubColor {
+  color: #6b7280 !important;
+  font-size: 0.9rem;
+}
+
+/* Description list */
+.listDescription {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+.listDescription li {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+/* Sign In / Sign Up button gradient */
+.btn-auth {
+  background: linear-gradient(135deg, #6a11cb, #2575fc) !important;
+  border-radius: 8px !important;
+  height: 50px !important;
+  font-weight: bold !important;
+  text-transform: none !important;
+}
+.btn-auth:hover {
+  background: linear-gradient(135deg, #5d0eb2, #1d63d2) !important;
+}
+
+/* Google login button to match */
+.btn-google {
+  width: 100% !important;
+  height: 50px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  background-color: #ffffff !important;
+  color: #444 !important;
+  border: 1px solid #ddd !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.2s ease-in-out !important;
+}
+.btn-google:hover {
+  background-color: #f7f7f7 !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-1px) !important;
+}
+.phone-input-container {
+  width: 100%;
+  margin-top: 16px; /* same as MUI margin="normal" */
+}
+

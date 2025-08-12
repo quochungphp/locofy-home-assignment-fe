@@ -1,0 +1,13 @@
+.appHeader {
+  background-color: #457eff;
+}
+
+header .signin {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 2px solid #fff;
+}
+
+header .signin:hover {
+  background-color: #457eff;
+}
