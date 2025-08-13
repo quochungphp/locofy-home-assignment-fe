@@ -327,22 +327,6 @@ export const FigmaParsedView: React.FC<{ figmaData: any }> = ({ figmaData }) => 
                         variant="outlined"
                       >
                         <Box sx={{ height: previewHeight, width: "100%", position: "relative", background: "#fff" }}>
-                          {bgImage ? (
-                            <Box
-                              sx={{
-                                position: "absolute",
-                                inset: 0,
-                                backgroundImage: bgImage,
-                                backgroundPosition,
-                                backgroundSize,
-                                backgroundRepeat: "no-repeat",
-                                // show a frame area so crop is visible
-                              }}
-                            />
-                          ) : (
-                            <Box sx={{ position: "absolute", inset: 0, background: fill || "#f6f6f6" }} />
-                          )}
-
                           {/* small overlay text */}
                           <Box
                             sx={{

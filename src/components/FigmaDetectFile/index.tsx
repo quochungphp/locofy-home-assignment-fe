@@ -76,6 +76,7 @@ export const FigmaDetectFileKey = () => {
                 name="figmaUrl"
                 autoFocus
                 onChange={(e) => setFigmaUrl(e.target.value)}
+                helperText="Example: https://www.figma.com/design/HpRUOkN89aKTWVOk8gOL16/HomeTest?node-id=3-467&m=draw"
               />
 
               <Button
