@@ -9,58 +9,68 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from "react-google-login";
 import "./style.css";
 import { googleAppClientId } from "../../utils/envs";
 import { AuthSigninPayloadDto, ErrorResponse } from "../../domain";
 import { postSignInByPassword } from "../../reduxStore/signin-request-by-password/action";
 import { useDispatch, useSelector } from "react-redux";
-import {serverApi} from "../../resources/server-api"
+import { serverApi } from "../../resources/server-api";
 import { signInByPasswordSelector } from "../../reduxStore/signin-request-by-password/sliceReducer";
 import { Alert } from "@mui/material";
+
 export const SignIn = () => {
   const dispatch = useDispatch();
   const initialState = useSelector(signInByPasswordSelector);
+
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
   const [errors, setErrors] = React.useState<ErrorResponse[]>();
-  const [status, setStatus] = React.useState('');
+  const [status, setStatus] = React.useState("");
+  const [formError, setFormError] = React.useState("");
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (username && password) {
-      const payload: AuthSigninPayloadDto = {
-        username,
-        password,
-      };
-      dispatch(postSignInByPassword(payload));
+
+    // Validation
+    if (!username.trim() || !password.trim()) {
+      setFormError("Username and password must not be empty");
+      return;
     }
+
+    setFormError("");
+    const payload: AuthSigninPayloadDto = { username, password };
+    dispatch(postSignInByPassword(payload));
   };
+
   React.useEffect(() => {
     if (initialState.data.status) {
-      setErrors(initialState.data.errors)
-      setStatus(initialState.data.status)
+      setErrors(initialState.data.errors);
+      setStatus(initialState.data.status);
     }
   }, [initialState]);
-  
+
   const accessToken = serverApi.getAccessToken();
+
   React.useEffect(() => {
-    
-    if (status === 'success' || accessToken) {
-      window.location.href = '/figma-detect-file';
+    if (status === "success" || accessToken) {
+      window.location.href = "/figma-detect-file";
     }
   }, [status, accessToken]);
+
   return (
-      <Container
-        component="main"
-        maxWidth="xs"
-        sx={{
-          padding: "40px 30px",
-          borderRadius: "20px",
-          marginTop: "60px",
-          backgroundColor: "white",
-          boxShadow: "0px 8px 25px rgba(0, 0, 0, 0.1)",
-        }}
-      > 
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
+        padding: "40px 30px",
+        borderRadius: "20px",
+        marginTop: "60px",
+        backgroundColor: "white",
+        boxShadow: "0px 8px 25px rgba(0, 0, 0, 0.1)",
+      }}
+    >
       <CssBaseline />
       <Box
         sx={{
@@ -71,27 +81,35 @@ export const SignIn = () => {
         }}
       >
         <Box
-        component="img"
-        alt="Locofy"
-        src="mainLogo.svg"
-        sx={{
-          width: 120, // fixed width
-          height: "auto",
-          backgroundColor: "#8a2be2",
-          padding: "5px",
-          marginBottom: 2,
-          display: "block",
-          borderRadius: "12px", // optional rounded edges
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", // soft shadow
-        }}
+          component="img"
+          alt="Locofy"
+          src="mainLogo.svg"
+          sx={{
+            width: 120,
+            height: "auto",
+            backgroundColor: "#8a2be2",
+            padding: "5px",
+            marginBottom: 2,
+            display: "block",
+            borderRadius: "12px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+          }}
         />
         <Typography component="h1" variant="h5" mb={1}>
           Login
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-
           <Grid container spacing={2}>
-            {status === 'error' && <Alert sx={{marginTop: 1}} severity="error" className="alertError">Username and Password are not correct!</Alert>}
+            {formError && (
+              <Alert sx={{ marginTop: 1 }} severity="error">
+                {formError}
+              </Alert>
+            )}
+            {status === "error" && (
+              <Alert sx={{ marginTop: 1 }} severity="error" className="alertError">
+                Username and Password are not correct!
+              </Alert>
+            )}
 
             <TextField
               margin="normal"
@@ -102,41 +120,42 @@ export const SignIn = () => {
               name="username"
               autoComplete="username"
               autoFocus
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
+
             <TextField
               margin="normal"
               required
               fullWidth
               name="password"
               label="Password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               autoComplete="current-password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+
             <Grid container>
               <Grid item xs>
                 <FormControlLabel
-                  control={<Checkbox value="showPassword" color="primary" />}
+                  control={
+                    <Checkbox
+                      checked={showPassword}
+                      onChange={(e) => setShowPassword(e.target.checked)}
+                      color="primary"
+                    />
+                  }
                   label="Show password"
                   className="textSubColor"
                 />
               </Grid>
 
               <Grid item>
-                <FormControlLabel
-                  control={
-                    <Link
-                      href="users/forgot-password"
-                      color="primary"
-                      mt={5}
-                      style={{ flex: 1 }}
-                    />
-                  }
-                  label="Forgot password"
-                  className="textSubColor"
-                />
+                <Link href="forgot-password" color="primary">
+                  Forgot password
+                </Link>
               </Grid>
             </Grid>
 
@@ -159,29 +178,31 @@ export const SignIn = () => {
             >
               Sign In
             </Button>
+
             <Grid item xs={12} mb={2}>
               <Typography className="textSubColor" textAlign={"center"}>
                 OR
               </Typography>
             </Grid>
+
             <GoogleLogin
-              style={{
-                marginTop: '1cm'
-              }}
               clientId={googleAppClientId}
               buttonText="Sign in With Google"
-              // onSuccess={responseGoogle}
-              // onFailure={responseGoogle}
-              cookiePolicy={'single_host_origin'}
+              cookiePolicy={"single_host_origin"}
               className="btn-google"
             />
 
-            <Grid item xs={12}>
+            <Grid item xs={12} mt={2}>
               <Typography className="textSubColor" textAlign={"center"}>
-                "Not on Locofy yet ?
-                <Link href="#" variant="body2" className="textSubColor">
-                  <b>{" Sign Up "}</b>
-                </Link>{" "}
+                Not on Locofy yet?{" "}
+                <Link
+                  href="/sign-up"
+                  variant="body2"
+                  className="textSubColor"
+                  style={{ fontWeight: "bold" }}
+                >
+                  Sign Up
+                </Link>
               </Typography>
             </Grid>
           </Grid>

@@ -15,7 +15,7 @@ const pages = [
   { id: "products", link: "#", label: "Products" },
   { id: "partners", link: "#", label: "Partners" },
   { id: "resources", link: "#", label: "Resources" },
-  { id: "figma_detect_file_key", link: "figma-detect-file", label: "Figma Detect File Key" },
+  { id: "figma_detect_file_key", link: "figma-detect-file", label: "Figma Detect" },
   { id: "sign_in", link: "sign-in", label: "Sign In", authRequired: false },
   { id: "sign_up", link: "sign-up", label: "Sign Up", authRequired: false },
   { id: "sign_out", link: "sign-out", label: "Sign Out", authRequired: true },
