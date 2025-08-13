@@ -103,20 +103,20 @@ export class Api {
     }
   }
 
-  public setTokensFromResponse(response: AxiosResponse): string {
-    const accessToken =
-      response.headers.accesstoken || response.headers.accessToken;
+  public setTokensFromResponse(response: AxiosResponse): string | null {
+    if (!response || !response.headers) return null;
+
+    const accessToken = response.headers["accesstoken"] as string | undefined;
+    const refreshToken = response.headers["refreshtoken"] as string | undefined;
+
     if (accessToken) {
       this.setAccessToken(accessToken);
     }
-
-    const refreshToken =
-      response.headers.refreshtoken || response.headers.RefreshToken;
     if (refreshToken) {
       this.setRefreshToken(refreshToken);
     }
 
-    return accessToken;
+    return accessToken ?? null;
   }
 
   private attachTokenFromStorage(): void {
@@ -126,6 +126,13 @@ export class Api {
         ...this.headers,
         Authorization: `Bearer ${token}`,
       } as any);
+    }
+  }
+
+  public clearTokens(): void {
+    if (isBrowser()) {
+      window.localStorage.removeItem(ACCESS_TOKEN);
+      window.localStorage.removeItem(REFRESH_TOKEN);
     }
   }
 }

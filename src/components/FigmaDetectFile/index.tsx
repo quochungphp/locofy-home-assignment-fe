@@ -16,15 +16,22 @@ import { FigmaParsedView } from "../FigmaParsedView";
 export const FigmaDetectFileKey = () => {
   const dispatch = useDispatch();
   const initialState = useSelector(detectFigmaFileKeySelector);
+
   const [figmaUrl, setFigmaUrl] = React.useState("");
   const [errors, setErrors] = React.useState<ErrorResponse[]>();
   const [status, setStatus] = React.useState("");
+  const [inputError, setInputError] = React.useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (figmaUrl) {
-      dispatch(postDetectFigmaFileKey({ url: figmaUrl }));
+
+    if (!figmaUrl.trim()) {
+      setInputError(true);
+      return;
     }
+
+    setInputError(false);
+    dispatch(postDetectFigmaFileKey({ url: figmaUrl }));
   };
 
   React.useEffect(() => {
@@ -52,7 +59,7 @@ export const FigmaDetectFileKey = () => {
           {/* Form */}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <Grid container spacing={2}>
-              {status === "error" && errors && errors?.length > 0 && (
+              {status === "error" && errors && errors.length > 0 && (
                 <Box sx={{ width: "100%", mt: 1 }}>
                   {errors.map((err, index) => (
                     <Alert
@@ -75,8 +82,14 @@ export const FigmaDetectFileKey = () => {
                 label="Figma File URL"
                 name="figmaUrl"
                 autoFocus
+                value={figmaUrl}
                 onChange={(e) => setFigmaUrl(e.target.value)}
-                helperText="Example: https://www.figma.com/design/HpRUOkN89aKTWVOk8gOL16/HomeTest?node-id=3-467&m=draw"
+                error={inputError}
+                helperText={
+                  inputError
+                    ? "Figma URL cannot be empty"
+                    : "Example: https://www.figma.com/design/HpRUOkN89aKTWVOk8gOL16/HomeTest?node-id=3-467&m=draw"
+                }
               />
 
               <Button

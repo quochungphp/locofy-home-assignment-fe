@@ -46,7 +46,7 @@ export const SignIn = () => {
   React.useEffect(() => {
     
     if (status === 'success' || accessToken) {
-      window.location.href = '/';
+      window.location.href = '/figma-detect-file';
     }
   }, [status, accessToken]);
   return (

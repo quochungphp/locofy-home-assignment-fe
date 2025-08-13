@@ -11,7 +11,8 @@ export default function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/" element={<SignUpView />} />
+          <Route path="/" element={<HomeView />} />
+          <Route path="/sign-up" element={<SignUpView />} />
           <Route path="/sign-in" element={<SignInView />} />
           <Route path="/figma-detect-file" element={<FigmaDetectFileKeyView />} />
         </Routes>
