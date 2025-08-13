@@ -8,6 +8,7 @@ export interface QueryParams {
 
 export class Api {
   baseUrl = process.env.REACT_APP_BACKEND_URL_BASE;
+  apiKey = process.env.REACT_APP_BACKEND_API_KEY;
   constructor(baseUrl?: string) {
     this.baseUrl = baseUrl;
     this.attachTokenFromStorage();
@@ -25,6 +26,7 @@ export class Api {
     if (token) {
       return {
         ...this.headers,
+        'x-api-key': this.apiKey,
         Authorization: `Bearer ${token}`,
       } as any;
     }

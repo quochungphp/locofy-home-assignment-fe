@@ -8,18 +8,11 @@
       "**/coverge": true
     },
     "typescript.referencesCodeLens.enabled": true,
-    "appService.zipIgnorePattern": [
-      ".vscode{,/**}"
-    ],
-    "appService.deploySubpath": "",
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": "explicit"
     },
     "javascript.preferences.importModuleSpecifier": "relative",
     "typescript.preferences.importModuleSpecifier": "relative",
-    "jest.runAllTestsFirst": false,
-    "jest.autoEnable": false,
-    "jest.showCoverageOnLoad": false,
     "editor.wordWrap": "on",
     "cSpell.words": [
       "internalid"
