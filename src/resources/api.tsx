@@ -22,17 +22,20 @@ export class Api {
     this.headers = headers;
   }
 
-  getHeaders(): AxiosRequestHeaders {
-    const token = this.getAccessToken();
-    if (token) {
-      return {
-        ...this.headers,
-        'x-api-key': this.apiKey,
-        Authorization: `Bearer ${token}`,
-      } as any;
-    }
-    return this.headers;
+getHeaders(): AxiosRequestHeaders {
+  const headers: AxiosRequestHeaders = {
+    ...this.headers,
+    'x-api-key': this.apiKey,
+  } as any;
+
+  const token = this.getAccessToken();
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
   }
+
+  return headers;
+}
+
 
   setAuth(bearer: string) {
     this.bearer = bearer;
