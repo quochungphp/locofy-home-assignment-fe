@@ -52,10 +52,19 @@ export const FigmaDetectFileKey = () => {
           {/* Form */}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <Grid container spacing={2}>
-              {status === "error" && errors?.length && (
-                <Alert sx={{ marginTop: 1 }} severity="error" className="alertError">
-                  {"Invalid Figma URL"}
-                </Alert>
+              {status === "error" && errors && errors?.length > 0 && (
+                <Box sx={{ width: "100%", mt: 1 }}>
+                  {errors.map((err, index) => (
+                    <Alert
+                      key={index}
+                      severity="error"
+                      className="alertError"
+                      sx={{ mb: 1 }}
+                    >
+                      {err.detail || err.title || "Invalid Figma URL"}
+                    </Alert>
+                  ))}
+                </Box>
               )}
 
               <TextField
