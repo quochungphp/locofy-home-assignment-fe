@@ -1,11 +1,12 @@
-import { getServerUrl } from "../utils/envs";
+import { apiKey, serverUrl } from "../utils/envs";
 import { Api } from "./api";
 import { AuthSigninPayloadDto, DetectFigmaFileKeyPayload, FigmaFileResponseDto, UserResponseDto, UserSignUpPayloadDto } from "../domain/locofy-backend-interface";
 
 class ServerApi extends Api{
   constructor() {
     super();
-    this.baseUrl = getServerUrl()
+    this.baseUrl = serverUrl;
+    this.apiKey = apiKey;
     const headers = {
       "Content-Type": "application/json",
     } as any;

@@ -7,10 +7,11 @@ export interface QueryParams {
 }
 
 export class Api {
-  baseUrl = process.env.REACT_APP_BACKEND_URL_BASE;
-  apiKey = process.env.REACT_APP_BACKEND_API_KEY;
-  constructor(baseUrl?: string) {
+  protected baseUrl: string | undefined;
+  protected apiKey: string | undefined ;
+  constructor(baseUrl?: string , apiKey? :string ) {
     this.baseUrl = baseUrl;
+    this.apiKey = apiKey;
     this.attachTokenFromStorage();
   }
 
